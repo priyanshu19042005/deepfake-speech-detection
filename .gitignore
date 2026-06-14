@@ -1,0 +1,23 @@
+# ---- Dataset (never commit the 17 GB) ----
+data/
+
+# ---- Cached features ----
+features/
+*.npy
+*.npz
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# ---- Logs / scratch ----
+*.log
+runs/
+.DS_Store
+
+# ---- Keep the trained model (do NOT ignore models/) ----
+# models/ is intentionally tracked — it's a required deliverable
