@@ -1,13 +1,13 @@
-# CPU-only PyTorch wheel — keeps the Streamlit Cloud build small and avoids the
-# large CUDA download. Pins are loosened so pip can resolve wheels that match
-# whatever Python version the deployment host uses (Linux), rather than the exact
-# Windows/Python-3.13 versions used during development.
+# CPU-only PyTorch wheel — small build, no CUDA download.
 --extra-index-url https://download.pytorch.org/whl/cpu
 
 torch
+numpy>=1.26
 librosa>=0.10
 soundfile>=0.12
-numpy<2.3
 scikit-learn>=1.3
 streamlit>=1.30
 matplotlib
+# Force a recent pyarrow that ships prebuilt wheels (older versions try to
+# compile from source on the deploy host and fail).
+pyarrow>=17
