@@ -1,10 +1,9 @@
 """
-Shared audio preprocessing + feature extraction.
+Audio preprocessing and mel-spectrogram features.
 
-This SAME module is used by training, predict.py, and the Streamlit app so that
-the feature pipeline is byte-for-byte identical everywhere. Any divergence here
-is the #1 cause of "great on validation, fails on the hidden set", so we keep a
-single source of truth.
+Training, predict.py and the app all import from here so they run the exact same
+pipeline. If these ever differ, the model scores great in training and badly on
+real audio, so I keep it in one place.
 """
 import os
 

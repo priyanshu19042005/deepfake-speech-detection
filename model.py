@@ -1,8 +1,8 @@
 """
-Lightweight CNN for log-mel spectrogram classification (genuine vs deepfake).
+Small CNN that classifies a mel-spectrogram as genuine vs deepfake.
 
-Kept small on purpose: training is CPU-only, and a compact model both trains
-fast and generalizes better to the hidden set than an over-parameterized one.
+I kept it small on purpose. Training runs on CPU, and a compact model generalizes
+better here than a big one (which just memorizes the training voices).
 Input:  (B, 1, N_MELS=64, N_FRAMES=188)
 Output: (B, 2) logits  ->  0 = genuine, 1 = deepfake
 """

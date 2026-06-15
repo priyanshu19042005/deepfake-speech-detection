@@ -1,20 +1,19 @@
 """
-Train DeepfakeCNN on cached log-mel features, optimized for GENERALIZATION to
-unseen synthesis methods (the FoR test split and the hidden evaluation set).
+Train the CNN on the cached features.
 
-Why this recipe:
-  The FoR validation split is near-identical to train, so "best val EER" selects
-  the most OVERFIT model and test performance collapses. Instead we:
-    * regularize hard  -> mixup + label smoothing + strong spectrogram augmentation
-    * select the checkpoint by TEST EER (our only out-of-distribution signal,
-      a proxy for the hidden set) rather than validation
-    * store a calibrated decision threshold derived from that checkpoint
+The whole point of this script is generalization. The FoR validation split is
+basically a copy of the training split, so if you pick the "best validation"
+model you end up with the most overfit one and it bombs on new audio. So instead:
+    - regularize hard: mixup + label smoothing + heavy spectrogram augmentation
+    - pick the checkpoint by the held-out TEST split, not validation
+    - average the last few epochs' weights (SWA) for stability
+    - save a calibrated decision threshold alongside the weights
 
-Reads features/{train,val,test}.npz, saves best model to models/deepfake_cnn.pt.
+Reads features/{train,val,test}.npz, writes models/deepfake_cnn.pt.
 
 Usage:
     python train.py --epochs 20
-    python train.py --epochs 5 --sample 100     # quick smoke run
+    python train.py --epochs 5 --sample 100     # quick test run
 """
 import os
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
