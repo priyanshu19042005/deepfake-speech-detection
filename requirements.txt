@@ -1,3 +1,7 @@
+# CPU-only PyTorch wheel — keeps the Streamlit Cloud build small and avoids the
+# large CUDA download (which can exceed free-tier limits). Works locally too.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 librosa==0.11.0
 soundfile==0.14.0
 numpy==2.3.5
